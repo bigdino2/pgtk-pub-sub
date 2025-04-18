@@ -1,0 +1,13 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    # generated files
+    - "**/*.g.dart"
+
+linter:
+  rules:
+    # change to true for first version
+    public_member_api_docs: false
+    avoid_print: false
+    lines_longer_than_80_chars: false

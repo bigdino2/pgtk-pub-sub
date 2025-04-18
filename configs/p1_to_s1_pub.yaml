@@ -1,0 +1,31 @@
+publisher:
+  host: 127.0.0.1
+  port: 8000
+  database: postgres
+  username: postgres
+  password: password
+  publication:
+    name: p1_to_s1_pub
+    replication_slot_name: p1_to_s1_slot
+    tables:
+      # array of tables to build, this key name is arbitrary
+      - t1:
+        schema: public
+        name: t1
+        chunk_settings:
+          # array of columns to order each chunk by, should be the primary key
+          order_by:
+            - id
+          # batch size of selects and inserts
+          chunk_size: 1000
+
+subscriber:
+  host: 127.0.0.1
+  port: 8001
+  database: postgres
+  username: postgres
+  password: password
+  subscription:
+    name: p1_to_s1_sub
+    # subscription owner/replication user connection string
+    connection_string: "host=p1 port=5432 dbname=postgres user=postgres password=password"
